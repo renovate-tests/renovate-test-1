@@ -1,0 +1,31 @@
+version: 2.0
+
+jobs:
+  npm-test:
+    docker:
+      - image: circleci/node:12.8.1@sha256:a1edd2889f410491a2e31653208260ab664fd3d8fcb729d9aa89fa86d90f3ea5
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-v1-{{ .Branch }}-
+            - npm-v1-
+          name: Restore npm cache
+      - run:
+          command: npm ci
+          name: Install npm dependencies
+      - save_cache:
+          key: npm-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          name: Save npm cache
+          paths:
+            - ~/.npm
+      - run:
+          command: npm test
+          name: Run JavaScript unit tests
+
+workflows:
+  version: 2
+  lint-test-build:
+    jobs:
+      - npm-test
