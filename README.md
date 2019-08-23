@@ -1,2 +1,3 @@
 # renovate-test
-Test Renovate functionality
+
+Test Renovate functionality for Node.js updates.
