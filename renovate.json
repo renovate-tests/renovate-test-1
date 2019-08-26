@@ -1,5 +1,46 @@
 {
-  "extends": ["github>PicturePipe/renovate-config"],
+  "docker": {
+    "packageRules": [
+      {
+        "packageNames": ["circleci/node", "node"],
+        "allowedVersions": "<11 || >11"
+      },
+      {
+        "packagePatterns": ["circleci/.+"],
+        "recreateClosed": true
+      },
+      {
+        "packageNames": ["circleci/python", "python"],
+        "allowedVersions": "<=3.7"
+      },
+      {
+        "packageNames": ["traefik"],
+        "allowedVersions": "<=1.7"
+      }
+    ],
+    "pin": {
+      "automerge": true
+    }
+  },
+  "extends": [
+    "config:base",
+    "default:automergeDigest",
+    "docker:enableMajor"
+  ],
+  "labels": ["renovate"],
+  "packageRules": [
+    {
+      "automerge": true,
+      "depTypeList": ["devDependencies"]
+    }
+  ],
+  "pinDigests": true,
+  "pip_requirements": {
+    "fileMatch": ["(^|/)requirements(\/*[\\w-]*).(txt|pip)$"]
+  },
+  "rebaseStalePrs": false,
+  "schedule": ["after 7:00 before 19:00 every weekday"],
+  "timezone": "Europe/Berlin",
   "node": {
     "supportPolicy": ["lts_latest"]
   }
