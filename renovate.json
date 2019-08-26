@@ -1,5 +1,6 @@
 {
   "docker": {
+    "pinDigests": true,
     "packageRules": [
       {
         "packageNames": ["circleci/node", "node"],
@@ -34,7 +35,6 @@
       "depTypeList": ["devDependencies"]
     }
   ],
-  "pinDigests": true,
   "pip_requirements": {
     "fileMatch": ["(^|/)requirements(\/*[\\w-]*).(txt|pip)$"]
   },
