@@ -3,7 +3,7 @@ version: 2.0
 jobs:
   npm-test:
     docker:
-      - image: circleci/node:12.8.1@sha256:c359be8f6990d4d1b83edab8909f637fa2956baf8dea178a89c94f66e2565916
+      - image: circleci/node:12.9.0@sha256:2d631878cad440bc598725ce5dec223be0fdd462c666619d034f652efab21831
     steps:
       - checkout
       - restore_cache:
